@@ -1,0 +1,44 @@
+body{
+  background-color: midnightblue;
+}
+
+.container{
+  background-color: white;
+  width: 800px;
+  margin: 100px auto;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  border: 2px solid black;
+  border-radius:15px;
+  padding: 10px;
+}
+
+.assessment{
+  grid-row:1;
+  grid-column: 1;
+}
+
+.answer{
+  grid-row:2;
+  grid-column: 1;
+}
+
+#answerField{
+  visibility: hidden;
+}
+
+.feedback{
+  grid-row:1;
+  grid-column: 2;
+}
+
+.score{
+  grid-row:2;
+  grid-column: 2;
+}
+
+p{
+  font-size: 28px;
+  text-align: center;
+}
