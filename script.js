@@ -14,29 +14,29 @@ var log = [];
 var level = 1;
 var score = 0;
 var problem;
-var counter =0;
-var beginTime,stopTime;
+var counter = 0;
+var beginTime, stopTime;
 var myAnswer;
 var time;
 
-startbutton.addEventListener('click',()=>{
+startbutton.addEventListener('click', () => {
   answerField.style.visibility = "visible";
   myReply.focus();
   startbutton.style.display = "none";
   beginTime = new Date();
   gameLoop();
-  time = setInterval(showTime,100);
+  time = setInterval(showTime, 100);
 })
 
-showTime = function(){
-  myTime.innerHTML = "time: " + Math.floor((new Date - beginTime)/1000) + " sec";
+showTime = function() {
+  myTime.innerHTML = "time: " + Math.floor((new Date - beginTime) / 1000) + " sec";
 }
 
 function gameLoop() {
   myAnswer = {}
-  serialCode.innerHTML= "number: " + counter;
-  myLevel.innerHTML= "level: " + level;
-  myScore.innerHTML= "score: " + score;
+  serialCode.innerHTML = "number: " + counter;
+  myLevel.innerHTML = "level: " + level;
+  myScore.innerHTML = "score: " + score;
   problem = createProblem(level);
   // create a problem
   myProblem.innerHTML = problem.print;
@@ -50,25 +50,35 @@ myReply.addEventListener('keyup', (evt) => {
     myAnswer.answer = myReply.value;
     //console.log(myAnswer);
     counter++;
-    if(counter%2 == 0 && level<4){
-      level++;
+    switch (counter) {
+      case 10:
+        level = 2
+        break;
+      case 20:
+        level = 2
+        break;
+      case 30:
+        level = 4
+        break;
+      default:
+
     }
-    if(problem.answer == myReply.value){
+    if (problem.answer == myReply.value) {
       score++;
       answerField.style.backgroundColor = "rgb(200,255,200)";
       myAnswer.correct = true;
-    } else{
+    } else {
       answerField.style.backgroundColor = "rgb(255,200,200)";
       myAnswer.correct = false
     }
-    myReply.value="";
+    myReply.value = "";
     log.push(myAnswer);
     console.log(log);
 
-    if(counter>2){
+    if (counter > 40) {
       let outputString = ""
-      for(let i=0; i<log.length;i++){
-        outputString += log[i].problem.print + " " + log[i].problem.answer + " " + log[i].answer + " " +log[i].correct + "<br>";
+      for (let i = 0; i < log.length; i++) {
+        outputString += log[i].problem.print + " " + log[i].problem.answer + " " + log[i].answer + " " + log[i].correct + "<br>";
       }
       result.innerHTML = outputString;
       clearInterval(time);
